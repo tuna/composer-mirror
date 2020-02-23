@@ -328,6 +328,8 @@ class CrawlerCommand extends Command
         ]; */
 
         $packages->update_at = date('Y-m-d H:i:s', $app->timestamp);
+        $prefix = parse_url($config->mirrorUrl)['path'];
+        $packages->{'providers-url'} = $prefix . $packages->{'providers-url'};
         file_put_contents($config->cachedir . 'packages.json.new', json_encode($packages));
         // replace the file atomically
         rename($config->cachedir . 'packages.json.new', $config->cachedir . 'packages.json');
