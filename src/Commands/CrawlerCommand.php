@@ -83,7 +83,7 @@ class CrawlerCommand extends Command
         $jsonfiles = $this->downloadPackages($config, $providers);
 
         // STEP 3
-        $this->downloadZipballs($config, $jsonfiles);
+        // $this->downloadZipballs($config, $jsonfiles);
 
         // STEP 4
         $this->flushFiles($config);
@@ -320,12 +320,12 @@ class CrawlerCommand extends Command
         $app = App::getInstance();
         $cachedir = $config->cachedir;
         $packages = json_decode(file_get_contents($cachedir.'packages.json.new'));
-        $packages->mirrors = [
+        /* $packages->mirrors = [
             [
                 'dist-url' => $config->distUrl . '%package%/%reference%.%type%',
                 'preferred' => true,
             ]
-        ];
+        ]; */
 
         $packages->update_at = date('Y-m-d H:i:s', $app->timestamp);
         file_put_contents($config->cachedir . 'packages.json', json_encode($packages));
